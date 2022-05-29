@@ -156,13 +156,10 @@ class AdventurePanel extends BasePanel {
 
 	/* キーリスナーの設定 */
 	private class AdventureKeyAdapter extends KeyAdapter {
-		AdventurePanel panel;
-
 		/* コンストラクタ */
 		private AdventureKeyAdapter(AdventurePanel p) {
 			super();
-			panel = p;
-			panel.addKeyListener(this);
+			p.addKeyListener(this);
 		}
 
 		@Override
@@ -200,7 +197,7 @@ class BattlePanel extends BasePanel {
 	@Override
 	protected void prepareComponent() {
 		// パネルの背景色の設定
-		super.setBackground(Color.white);
+		super.setBackground(new Color(200, 230, 205));
 
 		// テキストラベルの更新
 		label.setText("【Battle】");
@@ -208,6 +205,9 @@ class BattlePanel extends BasePanel {
 		label.setFont(this.font);
 		// フォントの色指定
 		label.setForeground(Color.black);
+		// 背景色の設定
+		label.setOpaque(true);
+		label.setBackground(Color.white);
 		// 枠線の設定
 		label.setBorder(new LineBorder(Color.black, 3, false));
 
@@ -226,14 +226,11 @@ class BattlePanel extends BasePanel {
 
 	/* マウス・キーリスナーの設定 */
 	private class BattleMouseAdapter extends MouseKeyAdapter {
-		BattlePanel panel;
-
 		/* コンストラクタ */
 		private BattleMouseAdapter(BattlePanel p) {
 			super();
-			panel = p;
-			panel.addMouseListener(this);
-			panel.addKeyListener(this);
+			p.addMouseListener(this);
+			p.addKeyListener(this);
 		}
 
 		@Override
@@ -276,6 +273,8 @@ class CharacterInfoPanel extends BasePanel {
 		label = new JLabel();
 		// キャラクターの生成
 		this.character = character;
+		// HPバーの作成
+		hpBar = new CharacterInfoProgressBar();
 	}
 
 	@Override
@@ -289,9 +288,8 @@ class CharacterInfoPanel extends BasePanel {
 		label.setFont(this.font);
 		// フォントの色指定
 		label.setForeground(Color.black);
-
-		// HPバーの作成
-		hpBar = new CharacterInfoProgressBar();
+		// 枠線の設定
+		label.setBorder(new LineBorder(Color.black, 1, false));
 
 		// パネルに各コンポーネントを追加
 		super.setLayout(new BorderLayout());
@@ -444,13 +442,10 @@ class ItemPanel extends BasePanel {
 
 	/* マウスリスナーの設定 */
 	private class ItemMouseAdapter extends MouseAdapter {
-		ItemPanel panel;
-
 		/* コンストラクタ */
 		private ItemMouseAdapter(ItemPanel p) {
 			super();
-			panel = p;
-			panel.addMouseListener(this);
+			p.addMouseListener(this);
 		}
 
 		@Override

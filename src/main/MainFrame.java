@@ -49,6 +49,7 @@ public class MainFrame extends JFrame {
 		super.setLayout(layout);
 
 		this.preparePanels();
+		this.setFrontScreenAndFocus(this.screenMode);
 	}
 
 	/* パネルの準備 */
@@ -85,6 +86,7 @@ public class MainFrame extends JFrame {
 		private BasePanel panel;
 		private ScreenMode screenMode;
 
+		/* コンストラクタ */
 		private PanelInfo(BasePanel panel, ScreenMode screenMode) {
 			this.panel = panel;
 			this.screenMode = screenMode;
