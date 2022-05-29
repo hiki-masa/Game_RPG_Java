@@ -188,8 +188,8 @@ class BattlePanel extends BasePanel {
 		font = new Font("メイリオ", Font.PLAIN, 15);
 		// テキストラベルの作成
 		label = new JLabel();
-		characterInfoPanel1 = new CharacterInfoPanel(new Character("ピカチュウ", 150));
-		characterInfoPanel2 = new CharacterInfoPanel(new Character("イーブイ", 130));
+		characterInfoPanel1 = new CharacterInfoPanel(new Character("ピカチュウ", 50, 35));
+		characterInfoPanel2 = new CharacterInfoPanel(new Character("イーブイ", 50, 55));
 		// マウスリスナーの登録
 		new BattleMouseAdapter(this);
 	}
@@ -219,9 +219,11 @@ class BattlePanel extends BasePanel {
 		characterInfoPanel1.prepareComponent();
 		characterInfoPanel1.setBounds(10, 10, 200, 50);
 		super.add(characterInfoPanel1);
+		super.add(characterInfoPanel1.character.frontImage);
 		characterInfoPanel2.prepareComponent();
 		characterInfoPanel2.setBounds(290, 340, 200, 50);
 		super.add(characterInfoPanel2);
+		super.add(characterInfoPanel2.character.backImage);
 	}
 
 	/* マウス・キーリスナーの設定 */
@@ -261,7 +263,8 @@ class BattlePanel extends BasePanel {
  * */
 class CharacterInfoPanel extends BasePanel {
 	private Font font;
-	private JLabel label;
+	private JLabel characterName;
+	private JLabel characterLevel;
 	protected Character character;
 	protected CharacterInfoProgressBar hpBar;
 
@@ -270,7 +273,8 @@ class CharacterInfoPanel extends BasePanel {
 		// フォントの設定
 		font = new Font("メイリオ", Font.PLAIN, 15);
 		// テキストラベルの作成
-		label = new JLabel();
+		characterName = new JLabel();
+		characterLevel = new JLabel();
 		// キャラクターの生成
 		this.character = character;
 		// HPバーの作成
@@ -283,17 +287,19 @@ class CharacterInfoPanel extends BasePanel {
 		super.setBackground(Color.white);
 
 		// テキストラベルの更新
-		label.setText(character.getName());
+		characterName.setText(character.getName());
+		characterLevel.setText("Lv." + character.getLevel());
 		// フォントの反映
-		label.setFont(this.font);
+		characterName.setFont(this.font);
+		characterLevel.setFont(this.font);
 		// フォントの色指定
-		label.setForeground(Color.black);
-		// 枠線の設定
-		label.setBorder(new LineBorder(Color.black, 1, false));
+		characterName.setForeground(Color.black);
+		characterLevel.setForeground(Color.black);
 
 		// パネルに各コンポーネントを追加
 		super.setLayout(new BorderLayout());
-		super.add(this.label, BorderLayout.CENTER);
+		super.add(this.characterName, BorderLayout.WEST);
+		super.add(characterLevel, BorderLayout.EAST);
 		super.add(hpBar, BorderLayout.PAGE_END);
 	}
 
